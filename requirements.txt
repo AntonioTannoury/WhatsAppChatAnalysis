@@ -1,0 +1,7 @@
+pandas
+plotly
+streamlit
+awesome-streamlit
+calendar
+opencv-python
+calplot
