@@ -398,7 +398,7 @@ def daily_calender(name):
 
 
 def image_show(height=None):
-    mypath = "pictures"
+    mypath = "pics"
     onlyfiles = [mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))]
     random_path = random.choice(onlyfiles)
     img = cv2.imread(random_path)
