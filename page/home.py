@@ -1,9 +1,9 @@
 import streamlit as st
-from viz import metrics, image_show
+from viz import metrics, image_show, filter_df, ad_grid
 from os import listdir
 from os.path import isfile, join
 import random
-import time
+import datetime as dt
 
 
 def write():
@@ -74,6 +74,35 @@ def write():
 
     metrics_figs = metrics(max=max, min=min, mean=mean)
     st.plotly_chart(metrics_figs, theme="streamlit", use_container_width=True)
+
+    st.sidebar.header("More Details?")
+    detailed_results = st.sidebar.checkbox("Show Chat History", value=False)
+
+    if detailed_results:
+        # st.sidebar.header("Filters")
+        # st.sidebar.subheader("  Who?")
+        # PH = st.sidebar.checkbox("  Perlei", value=False)
+        # AT = st.sidebar.checkbox("  Antonio", value=False)
+        # names = [PH * "Perlei", AT * "Antonio"]
+        # format = "YYYY/MM/DD"  # format output
+        # start_date = dt.date(year=2020, month=11, day=1)
+        # end_date = dt.date(year=2023, month=3, day=1)
+        # max_days = end_date - start_date
+
+        # slider = st.sidebar.slider(
+        #     "Select date",
+        #     min_value=start_date,
+        #     value=(start_date, end_date),
+        #     max_value=end_date,
+        #     format=format,
+        # )
+        # min_date = slider[0].strftime("%Y/%m/%d")
+        # max_date = slider[1].strftime("%Y/%m/%d")
+
+        # print(f"################\n{min_date}\n{max_date}")
+        filter_data = filter_df()
+        ## Sanity check
+        ad_grid(filter_data)
 
     # if max:
     #     max_fig = metric("max")

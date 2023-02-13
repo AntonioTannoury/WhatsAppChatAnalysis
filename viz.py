@@ -5,13 +5,15 @@ import plotly.graph_objects as go
 import calplot
 import cv2
 import calendar
+from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 #%%
-df = pd.read_csv("data.csv")
+df = pd.read_csv(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\data.csv")
 df["timestamp"] = pd.to_datetime(df["timestamp"])
 df.set_index("timestamp", inplace=True)
+df.insert(0, "timestamp", df.index)
 df["count"] = 1
-
+#%%
 df_weekdays = df.groupby(["author", "weekday"]).sum().reset_index()
 cats = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 df_weekdays["weekday"] = pd.Categorical(df_weekdays["weekday"], cats)
@@ -19,7 +21,7 @@ df_weekdays = df_weekdays.sort_values("weekday")
 
 
 # Counts
-df_counts = df.reset_index()
+df_counts = df.drop(columns="timestamp").reset_index()
 df_counts["month_date"] = pd.to_datetime(df_counts["timestamp"].dt.strftime("%Y-%m"))
 
 at_df = df_counts[df_counts.author == "Antonio"]
@@ -122,6 +124,42 @@ metrics_dict = {
 def text_format(color, name, header):
     title = f"<{header} style='text-align: center; color: {color};'>{name}</{header}>"
     return title
+
+
+def filter_df(
+    name=["Antonio", "Perlei"],
+    date_min=df.timestamp.min().strftime("%Y/%m/%d"),
+    date_max=df.timestamp.max().strftime("%Y/%m/%d"),
+):
+    df_filtered = df[
+        (df.author.isin(name)) & (df.index.to_series().between(date_min, date_max))
+    ].sort_index()
+
+    df_filtered.columns = [i.title() for i in df_filtered.columns]
+
+    return df_filtered
+
+
+def ad_grid(data):
+    gb = GridOptionsBuilder.from_dataframe(data)
+    gb.configure_pagination(paginationAutoPageSize=True)  # Add pagination
+    gb.configure_side_bar()  # Add a sidebar
+    # gb.configure_selection('multiple', use_checkbox=True, groupSelectsChildren="Group checkbox select children") #Enable multi-row selection
+    gridOptions = gb.build()
+
+    grid_response = AgGrid(
+        data,
+        gridOptions=gridOptions,
+        data_return_mode="AS_INPUT",
+        update_mode="MODEL_CHANGED",
+        fit_columns_on_grid_load=False,
+        theme="streamlit",  # Add theme color to the table
+        enable_enterprise_modules=True,
+        height=600,
+        width="100%",
+        reload_data=True,
+    )
+    return grid_response
 
 
 def metrics(max=True, min=True, mean=True):
