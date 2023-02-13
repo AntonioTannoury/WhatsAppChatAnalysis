@@ -13,17 +13,16 @@ def main():
 
     PAGES = {
         "Home Sweet Home": page.home,
-        "Random Love Statistics": page.Statistics,
-        "Random Love Visualization": page.Pics,
-        "Random Love NLP": page.NLP,
-
+        "Random Statistics": page.Statistics,
+        "Random Visualization": page.Pics,
+        "Random NLP": page.NLP,
     }
 
-    st.sidebar.title("Love Navigation")
+    st.sidebar.title("Navigation")
     selection = st.sidebar.radio("Love Pages", list(PAGES.keys()))
 
     _page = PAGES[selection]
-    # with st.spinner(f"Loading {selection} ..."):
+    st.spinner(f"Loading {selection} ...")
     ast.shared.components.write_page(_page)
 
 

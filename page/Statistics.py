@@ -17,7 +17,7 @@ def write():
     with col1:
         st.markdown(
             """
-            # When Random Love Hits
+            # When Love Hits Randomly
             ## It hits hard
             ### And basic logic becomes illogical 
             .

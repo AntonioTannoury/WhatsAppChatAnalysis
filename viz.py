@@ -334,7 +334,7 @@ def daily_scatter():
         x="timestamp",
         y="words",
         color="author",
-        title="Word count per entity",
+        title="Daily Word count per entity",
         color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
@@ -358,7 +358,7 @@ def month_bar():
         x="timestamp",
         y="words",
         color="author",
-        title="Week days Chat per entity",
+        title="Monthly Chat per entity",
         color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
