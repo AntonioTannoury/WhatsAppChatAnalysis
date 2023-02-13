@@ -21,7 +21,7 @@ def write():
 
             ### It hits hard
             ### And basic logic becomes illogical 
-            ###.
+            .
             ### It breaks rules
             ### So an Ostriche can become a Flamingo 🦩
 
@@ -30,11 +30,12 @@ def write():
         )
 
     with col2:
+        
         image = image_show()
         st.plotly_chart(image, theme="streamlit", use_container_width=True)
 
     st.sidebar.header("Select the Metrics you want to see")
-    historical_trend = st.sidebar.checkbox("Historical Trend", value=True)
+    historical_trend = st.sidebar.checkbox("Historical Trend", value=False)
     date_category = st.sidebar.checkbox("By Time Category", value=False)
     calendar = st.sidebar.checkbox("Calendar", value=False)
 

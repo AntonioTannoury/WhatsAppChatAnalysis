@@ -409,7 +409,7 @@ def image_show(height=600):
     return fig
 
 
-# %%
+# #%%
 # import cv2
 
 
@@ -451,8 +451,8 @@ def image_show(height=600):
 # for idx,i in enumerate(onlyfiles):
 #     img = cv2.imread(i)
 #     Z = image_resize(img, height=700)
-#     cv2.imwrite(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\pictures\pic_"+str(idx)+".jpg", Z)
+#     cv2.imwrite(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\pics\pic_"+str(idx)+".jpg", Z)
 
-# # %%
+# %%
 
-# # %%
+# %%
