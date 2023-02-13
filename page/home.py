@@ -24,7 +24,7 @@ def write():
 
             """
         )
-
+        st.button("Don't push")
     with col2:
         image = image_show()
         st.plotly_chart(image, theme="streamlit", use_container_width=True)
