@@ -29,12 +29,10 @@ def write():
         )
 
     with col2:
-        mypath = "/home/ai2/antonio/Chat/pics"
+        mypath = "pics"
         onlyfiles = [
             mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))
         ]
         random_path = random.choice(onlyfiles)
         image = image_show(random_path)
         st.plotly_chart(image, theme="streamlit", use_container_width=True)
-
-    

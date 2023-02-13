@@ -1,7 +1,6 @@
 import streamlit as st
 from viz import metrics, image_show, filter_df, ad_grid
-from os import listdir
-from os.path import isfile, join
+
 import random
 import datetime as dt
 
@@ -27,12 +26,7 @@ def write():
         )
 
     with col2:
-        mypath = "pics"
-        onlyfiles = [
-            mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))
-        ]
-        random_path = random.choice(onlyfiles)
-        image = image_show(random_path)
+        image = image_show()
         st.plotly_chart(image, theme="streamlit", use_container_width=True)
 
     st.sidebar.header("Select the Metrics you want to see")
