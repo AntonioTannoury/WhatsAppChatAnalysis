@@ -318,7 +318,8 @@ def daily_calender():
 
 def image_show(path):
     img = cv2.imread(path)
-    fig = px.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    fig = px.imshow(img)
     fig.update_xaxes(showticklabels=False)
     fig.update_yaxes(showticklabels=False)
     return fig
