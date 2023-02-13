@@ -30,7 +30,7 @@ def write():
         st.markdown("#")
         st.markdown("#")
         st.markdown("#")
-        st.button("Don't push")
+        st.button("Don't push!")
     with col2:
 
         image = image_show()
