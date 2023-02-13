@@ -16,11 +16,11 @@ def write():
             """
             # When Random Love Hits
 
-            ### It hits hard
-            ### So Reality would look like a order Chaos 
+            ## It hits hard
+            ## And basic logic becomes illogical 
             .
-            ### It breaks rules
-            ### So an Ostriche can become a Flamingo 🦩
+            ## It breaks rules
+            ## So an Ostriche can become a Flamingo 🦩
 
             """
         )
