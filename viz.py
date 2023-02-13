@@ -8,7 +8,7 @@ import calendar
 from st_aggrid import GridOptionsBuilder, AgGrid, GridUpdateMode, DataReturnMode
 
 #%%
-df = pd.read_csv(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\data.csv")
+df = pd.read_csv("data.csv")
 df["timestamp"] = pd.to_datetime(df["timestamp"])
 df.set_index("timestamp", inplace=True)
 df.insert(0, "timestamp", df.index)
