@@ -24,6 +24,9 @@ def write():
 
             """
         )
+        st.markdown("#")
+        st.markdown("#")
+        st.markdown("#")
         st.button("Don't push")
     with col2:
         image = image_show()
@@ -31,8 +34,8 @@ def write():
 
     st.sidebar.header("Select the Metrics you want to see")
     max = st.sidebar.checkbox("Maximum", value=True)
-    min = st.sidebar.checkbox("Minimum", value=False)
-    mean = st.sidebar.checkbox("Average", value=False)
+    min = st.sidebar.checkbox("Minimum", value=True)
+    mean = st.sidebar.checkbox("Average", value=True)
 
     names = ["Perlei", "Love", "Antonio"]
     colors = ["yellow", "red", "blue"]
