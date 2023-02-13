@@ -10,11 +10,14 @@ import streamlit as st
 from os import listdir
 from os.path import isfile, join
 import random
+
 #%%
 @st.cache_data
 def load_data():
 
+    # df = pd.read_csv(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\data.csv")
     df = pd.read_csv("data.csv")
+
     df["timestamp"] = pd.to_datetime(df["timestamp"])
     df.set_index("timestamp", inplace=True)
     df.insert(0, "timestamp", df.index)
@@ -332,6 +335,7 @@ def daily_scatter():
         y="words",
         color="author",
         title="Word count per entity",
+        color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
 
@@ -343,6 +347,7 @@ def monthly_bar():
         y="words",
         color="author",
         title="Monthly Word count per entity",
+        color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
 
@@ -354,6 +359,7 @@ def month_bar():
         y="words",
         color="author",
         title="Week days Chat per entity",
+        color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
 
@@ -365,46 +371,88 @@ def weekday_bar():
         y="words",
         color="author",
         title="Week days Chat per entity",
+        color_discrete_map={"Antonio": "blue", "Perlei": "yellow"},
     )
     return fig
 
 
-def daily_calender():
+def daily_calender(name):
+    if name == "Antonio":
+        data_cal = df[df.author == "Antonio"]
+        color = "PuBu"
+    elif name == "Perlei":
+        data_cal = df[df.author == "Antonio"]
+        color = "Wistia"
+    else:
+        data_cal = df.copy()
+        color = "magma_r"
+
     cal = calplot.calplot(
-        data=df["words"],
+        data=data_cal["words"],
         how="sum",
-        cmap="magma_r",
+        cmap=color,
         figsize=(16, 8),
         suptitle="Word count Calender",
     )
-    return cal
+    return cal[0]
 
 
-def image_show():
+def image_show(height=None):
     mypath = "pictures"
-    onlyfiles = [
-    mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))
-        ]
+    onlyfiles = [mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))]
     random_path = random.choice(onlyfiles)
     img = cv2.imread(random_path)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    fig = px.imshow(img)
+    fig = px.imshow(img, height=height)
     fig.update_xaxes(showticklabels=False)
     fig.update_yaxes(showticklabels=False)
     return fig
 
 
-# # %%
+# %%
 # import cv2
 
-# # img = cv2.imread(r'C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\pics\IMG_20200912_145354.jpg')
-# mypath = "C:/Users/AntonioTannoury/Projects/WhatsAppChatAnalysis/pics"
+
+# def image_resize(image, width = None, height = None, inter = cv2.INTER_AREA):
+#     # initialize the dimensions of the image to be resized and
+#     # grab the image size
+#     dim = None
+#     (h, w) = image.shape[:2]
+
+#     # if both the width and height are None, then return the
+#     # original image
+#     if width is None and height is None:
+#         return image
+
+#     # check to see if the width is None
+#     if width is None:
+#         # calculate the ratio of the height and construct the
+#         # dimensions
+#         r = height / float(h)
+#         dim = (int(w * r), height)
+
+#     # otherwise, the height is None
+#     else:
+#         # calculate the ratio of the width and construct the
+#         # dimensions
+#         r = width / float(w)
+#         dim = (width, int(h * r))
+
+#     # resize the image
+#     resized = cv2.resize(image, dim, interpolation = inter)
+
+#     # return the resized image
+#     return resized
+
+# mypath = r"C:\Users\AntonioTannoury\Desktop\Chat\pics"
 # onlyfiles = [
 #     mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))
 #     ]
 # for idx,i in enumerate(onlyfiles):
 #     img = cv2.imread(i)
-#     Z= cv2.resize(img,(480,380),fx=0, fy=0, interpolation = cv2.INTER_NEAREST)
+#     Z = image_resize(img, height=700)
 #     cv2.imwrite(r"C:\Users\AntonioTannoury\Projects\WhatsAppChatAnalysis\pictures\pic_"+str(idx)+".jpg", Z)
+
+# # %%
 
 # # %%

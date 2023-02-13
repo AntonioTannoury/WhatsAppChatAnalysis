@@ -3,7 +3,7 @@ import streamlit as st
 
 import page.Statistics
 import page.home
-import page.Visualization
+import page.Pics
 import page.NLP
 
 st.set_page_config(page_title="Random Love Demo", layout="wide")
@@ -14,8 +14,8 @@ def main():
     PAGES = {
         "Home Sweet Home": page.home,
         "Random Love Statistics": page.Statistics,
-        # "Random Love Visualization": page.Visualization,
-        # "Random Love NLP": page.NLP,
+        "Random Love Visualization": page.Pics,
+        "Random Love NLP": page.NLP,
 
     }
 

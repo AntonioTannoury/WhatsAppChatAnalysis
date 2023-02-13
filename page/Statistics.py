@@ -1,13 +1,13 @@
-import datetime
-from typing import List
-import numpy as np
 import streamlit as st
 
-from viz import image_show, daily_scatter, weekday_bar
-from os import listdir
-from os.path import isfile, join
-import random
-import time
+from viz import (
+    image_show,
+    daily_scatter,
+    monthly_bar,
+    weekday_bar,
+    month_bar,
+    daily_calender,
+)
 
 
 def write():
@@ -29,10 +29,34 @@ def write():
         )
 
     with col2:
-        mypath = "pics"
-        onlyfiles = [
-            mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))
-        ]
-        random_path = random.choice(onlyfiles)
-        image = image_show(random_path)
+        image = image_show()
         st.plotly_chart(image, theme="streamlit", use_container_width=True)
+
+    st.sidebar.header("Select the Metrics you want to see")
+    historical_trend = st.sidebar.checkbox("Historical Trend", value=True)
+    date_category = st.sidebar.checkbox("By Time Category", value=False)
+    calendar = st.sidebar.checkbox("Calendar", value=False)
+
+    col11, col12 = st.columns(2)
+
+    if historical_trend:
+        col11, col12 = st.columns(2)
+        with col11:
+            st.plotly_chart(
+                daily_scatter(), theme="streamlit", use_container_width=True
+            )
+
+        with col12:
+            st.plotly_chart(monthly_bar(), theme="streamlit", use_container_width=True)
+
+    if date_category:
+        col11, col12 = st.columns(2)
+        with col11:
+            st.plotly_chart(weekday_bar(), theme="streamlit", use_container_width=True)
+
+        with col12:
+            st.plotly_chart(month_bar(), theme="streamlit", use_container_width=True)
+
+    if calendar:
+        option = st.selectbox("Select Author:", ("Love", "Perlei", "Antonio"))
+        st.pyplot(daily_calender(option))
