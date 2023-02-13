@@ -19,11 +19,12 @@ def write():
             """
             # When Random Love Hits
 
-            ## It hits hard
-            ## And basic logic becomes illogical 
-            .
-            ## It breaks rules
-            ## So an Ostriche can become a Flamingo 🦩
+            ### It hits hard
+            ### And basic logic becomes illogical 
+            ###.
+            ### It breaks rules
+            ### So an Ostriche can become a Flamingo 🦩
+
 
             """
         )
