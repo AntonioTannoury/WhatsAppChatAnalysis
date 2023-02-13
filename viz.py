@@ -397,7 +397,7 @@ def daily_calender(name):
     return cal[0]
 
 
-def image_show(height=None):
+def image_show(height=400):
     mypath = "pics"
     onlyfiles = [mypath + "/" + f for f in listdir(mypath) if isfile(join(mypath, f))]
     random_path = random.choice(onlyfiles)
